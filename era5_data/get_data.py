@@ -4,9 +4,9 @@ from pathlib import Path
 # ===============================
 # CONFIGURATION – EASY TO MODIFY
 # ===============================
-years = range(2024, 2026)  # From 2024 to 2025 inclusive
+years = range(2020, 2026)  # From 2024 to 2025 inclusive
 months = range(1, 13)      # January to December
-area = [49.38, -125, 24.52, -66.95]  # US bounding box: [N, W, S, E]
+area = [71.5, -179.1, 18.9, -66.9]  # US bounding box: [N, W, S, E]
 output_dir = Path("era5_downloads")
 output_dir.mkdir(exist_ok=True)
 
