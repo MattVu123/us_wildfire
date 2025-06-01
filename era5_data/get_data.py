@@ -11,11 +11,13 @@ output_dir = Path("era5_downloads")
 output_dir.mkdir(exist_ok=True)
 
 variables = [
-    "10m_u_component_of_wind",
+    "10m_u_component_of_wind", 
     "10m_v_component_of_wind",
     "2m_dewpoint_temperature",
     "2m_temperature",
-    "total_precipitation"
+    "total_precipitation",
+    "mean_sea_level_pressure",
+    "surface_pressure"
 ]
 
 # ===============================
