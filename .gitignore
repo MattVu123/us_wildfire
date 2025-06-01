@@ -1,0 +1,5 @@
+# Ignore everything in the data folder
+data/*
+
+# But DO include zip files
+!data/*.zip
