@@ -15,7 +15,7 @@ variables = [
     "10m_v_component_of_wind",       # North-south wind at 10 meters above ground (positive = wind blowing north)
     "2m_dewpoint_temperature",       # Temperature at which air near the ground becomes saturated (humidity info)
     "2m_temperature",                # Air temperature measured 2 meters above the ground
-    "total_precipitation",          # Total rain/snowfall during the time period (in meters of water)
+    "total_precipitation",          # Total rain/snowfall during the hour leading up to the period (in meters of water)
     "mean_sea_level_pressure",       # Atmospheric pressure adjusted to sea level (used for tracking weather systems)
     "surface_pressure"              # Actual air pressure at ground level (depends on elevation and weather)
 ]
