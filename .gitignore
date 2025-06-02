@@ -1,0 +1,6 @@
+# ignore dataset folders
+data/raw_data/*
+# include zip datasets
+!data/raw_data/*.zip
+# include any code
+!data/raw_data/*.py

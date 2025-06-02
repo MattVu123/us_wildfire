@@ -7,7 +7,7 @@ from pathlib import Path
 years = range(2020, 2026)  # From 2024 to 2025 inclusive
 months = range(1, 13)      # January to December
 area = [71.5, -179.1, 18.9, -66.9]  # US bounding box: [N, W, S, E]
-output_dir = Path("era5_downloads")
+output_dir = Path(__file__).parent / "era5_downloads"
 output_dir.mkdir(exist_ok=True)
 
 variables = [
