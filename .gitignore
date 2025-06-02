@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 # ignore dataset folders
 data/raw_data/*
 # include zip datasets
 !data/raw_data/*.zip
 # include any code
 !data/raw_data/*.py
+=======
+# Ignore everything in the data folder
+data/*
+
+# But DO include zip files
+!data/*.zip
+>>>>>>> 30ddae56021ce99ac65d3aaec1e86f28ddc2d00a
