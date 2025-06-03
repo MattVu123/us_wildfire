@@ -39,11 +39,12 @@ for year in years:
             "month": month_str,
             "day": days,
             "time": [f"{h:02d}:00" for h in range(24)],
-            "format": "netcdf",
+            "data_format": "netcdf",
+            "download_format": "unarchived",
             "area": area,
         }
 
-        filename = output_dir / f"era5_us_{year_str}_{month_str}.nc"
+        filename = output_dir / f"era5_us_{year_str}_{month_str}.zip"
         print(f"Downloading ERA5 data for {year_str}-{month_str}...")
 
         try:
