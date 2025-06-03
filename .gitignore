@@ -1,8 +1,14 @@
-# ignore dataset folders
+# Ignore everything in the folder
 data/raw_data/*
-data/raw_data/era5_data.zip
-# include zip datasets
-! data/raw_data/*.zip
-# include any code
-! data/raw_data/*.py
-! data/raw_data/*.ipynb
+
+# Unignore the folder itself (needed)
+!data/raw_data/
+
+# Unignore zip files in the folder
+!data/raw_data/*.zip
+
+# Unignore Python files in the folder
+!data/raw_data/*.py
+
+# Unignore notebook files in the folder
+!data/raw_data/*.ipynb
