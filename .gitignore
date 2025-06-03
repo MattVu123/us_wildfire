@@ -5,4 +5,4 @@ data/raw_data/era5_data.zip
 ! data/raw_data/*.zip
 # include any code
 ! data/raw_data/*.py
-
+! data/raw_data/*.ipynb
