@@ -1,6 +1,8 @@
 # ignore dataset folders
 data/raw_data/*
+data/raw_data/era5_data.zip
 # include zip datasets
-!data/raw_data/*.zip
+! data/raw_data/*.zip
 # include any code
-!data/raw_data/*.py
+! data/raw_data/*.py
+
