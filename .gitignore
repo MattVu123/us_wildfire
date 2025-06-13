@@ -12,3 +12,8 @@ data/raw_data/*
 
 # Unignore notebook files in the folder
 !data/raw_data/*.ipynb
+
+data/raw_data/Artes-Vivancos_San-Miguel_2018.zip
+data/raw_data/MODIS_GWIS_Active_FireEvents.zip
+data/raw_data/MODIS_GWIS_Final_FireEvents.zip
+
