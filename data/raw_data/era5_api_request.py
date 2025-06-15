@@ -1,6 +1,7 @@
 import cdsapi
 from pathlib import Path
 import zipfile
+import xarray as xr
 
 # ===============================
 # CONFIGURATION – EASY TO MODIFY
@@ -12,40 +13,23 @@ output_dir = Path.cwd() / "era5_downloads"
 output_dir.mkdir(exist_ok=True)
 
 variables = [
-    "10m_u_component_of_wind",        # Zonal (west–east) wind component at 10 meters above the surface [m/s]
-                                      # Derived from model wind fields interpolated to 10m height.
-                                      
-    "10m_v_component_of_wind",        # Meridional (south–north) wind component at 10 meters above the surface [m/s]
-                                      # Also interpolated to 10m height from model levels.
+    # INSTANTANEOUS VARIABLES
+    "10m_u_component_of_wind",         # Instant – Zonal (west–east) wind at 10m [m/s]
+    "10m_v_component_of_wind",         # Instant – Meridional (south–north) wind at 10m [m/s]
+    "2m_dewpoint_temperature",         # Instant – Dewpoint temp at 2m [K], convert: °C = K - 273.15
+    "2m_temperature",                  # Instant – Air temperature at 2m [K], convert: °C = K - 273.15
+    "mean_sea_level_pressure",         # Instant – Pressure reduced to sea level [Pa]
+    "surface_pressure",                # Instant – Atmospheric pressure at surface [Pa]
+    "leaf_area_index_high_vegetation", # Instant – LAI high vegetation [dimensionless]
+    "leaf_area_index_low_vegetation",  # Instant – LAI low vegetation [dimensionless]
 
-    "2m_dewpoint_temperature",        # Temperature at which air becomes saturated with moisture at 2 meters [K]
-                                      # Proxy for humidity. Interpolated from the lowest model level and surface.
-                                      # Convert to °C with: °C = K - 273.15
-
-    "2m_temperature",                 # Instantaneous air temperature at 2 meters above the surface [K]
-                                      # Interpolated from model levels to 2m. Convert to °C with: °C = K - 273.15
-
-    "mean_sea_level_pressure",        # Atmospheric pressure at sea level (standardized elevation) [Pa]
-                                      # Calculated using surface pressure, temperature, and geopotential height.
-
-    "surface_pressure",              # Instantaneous atmospheric pressure at the surface of the Earth [Pa]
-                                      # Directly from the model surface level.
-
-    "total_precipitation",           # Total accumulated precipitation (rain, snow, etc.) over the previous hour [m]
-                                      # Includes both large-scale and convective precipitation types.
-
-    "surface_net_solar_radiation",   # Net shortwave radiation (downward - upward) at the surface [J/m²]
-                                      # Represents total solar energy absorbed over the hour.
-
-    "leaf_area_index_high_vegetation", # Leaf area index of high (tall) vegetation types (e.g., trees) [dimensionless]
-                                        # Derived from satellite observations and land-surface model assimilation.
-
-    "leaf_area_index_low_vegetation"  # Leaf area index of low vegetation (e.g., grass, crops) [dimensionless]
-                                      # Also derived from satellite data and model-based surface assimilation.
+    # ACCUMULATED VARIABLES
+    "total_precipitation",            # Accum – Total precipitation over previous hour [m]
+    "surface_net_solar_radiation",    # Accum – Net shortwave radiation at surface [J/m²]
 ]
 
 # ===============================
-# Download + Extract loop
+# DOWNLOAD + EXTRACT + MERGE
 # ===============================
 client = cdsapi.Client()
 
@@ -53,7 +37,7 @@ for year in years:
     for month in months:
         year_str = str(year)
         month_str = str(month).zfill(2)
-        days = [str(day).zfill(2) for day in range(1, 32)]  # CDS handles invalid days
+        days = [str(day).zfill(2) for day in range(1, 32)]  # CDS handles invalid dates internally
 
         request = {
             "product_type": "reanalysis",
@@ -68,32 +52,54 @@ for year in years:
         }
 
         zip_filename = output_dir / f"era5_us_{year_str}_{month_str}.zip"
-        print(f"Downloading ERA5 data for {year_str}-{month_str}...")
+        print(f"\n📥 Downloading ERA5 data for {year_str}-{month_str}...")
 
         try:
             client.retrieve("reanalysis-era5-single-levels", request, str(zip_filename))
-            print(f"✔ Saved to {zip_filename}")
+            print(f"✔️ Saved to {zip_filename.name}")
 
-            # Extract only the data_stream-oper_stepType-instant.nc file
+            # Extract both instant and accum .nc files
             with zipfile.ZipFile(zip_filename, 'r') as zip_ref:
-                target_file = "data_stream-oper_stepType-instant.nc"
-                if target_file in zip_ref.namelist():
-                    print(f"Extracting {target_file}...")
-                    zip_ref.extract(target_file, path=output_dir)
-                    extracted_path = output_dir / target_file
+                namelist = zip_ref.namelist()
+                instant_file = next((f for f in namelist if "instant" in f), None)
+                accum_file = next((f for f in namelist if "accum" in f), None)
 
-                    # Rename extracted file
-                    new_nc_filename = output_dir / f"era5_us_{year_str}_{month_str}.nc"
-                    extracted_path.rename(new_nc_filename)
-                    print(f"✔ Extracted and renamed to {new_nc_filename}")
-                else:
-                    print(f"⚠️ {target_file} not found in zip {zip_filename.name}")
+                if not instant_file or not accum_file:
+                    raise RuntimeError("Expected both 'instant' and 'accum' .nc files in zip archive")
 
-            # Remove the zip file after extraction
-            zip_filename.unlink()
-            print(f"Deleted zip file {zip_filename.name}")
+                # Extract both files
+                zip_ref.extract(instant_file, path=output_dir)
+                zip_ref.extract(accum_file, path=output_dir)
+
+            # Define paths
+            instant_path = output_dir / instant_file
+            accum_path = output_dir / accum_file
+            renamed_instant = output_dir / f"era5_us_{year_str}_{month_str}_instant.nc"
+            renamed_accum = output_dir / f"era5_us_{year_str}_{month_str}_accum.nc"
+            instant_path.rename(renamed_instant)
+            accum_path.rename(renamed_accum)
+
+            # Merge datasets
+            print("🔀 Merging instant and accum datasets...")
+            ds_instant = xr.open_dataset(renamed_instant)
+            ds_accum = xr.open_dataset(renamed_accum)
+            ds_merged = xr.merge([ds_instant, ds_accum])
+
+            merged_path = output_dir / f"era5_us_{year_str}_{month_str}.nc"
+            ds_merged.to_netcdf(merged_path)
+            print(f"✅ Merged dataset saved to {merged_path.name}")
+
+            # Close and cleanup
+            ds_instant.close()
+            ds_accum.close()
+            for f in [zip_filename, renamed_instant, renamed_accum]:
+                if f.exists():
+                    f.unlink()
+                    print(f"🗑️ Deleted {f.name}")
 
         except Exception as e:
-            print(f"✘ Failed for {year_str}-{month_str}: {e}")
+            print(f"❌ Failed for {year_str}-{month_str}: {e}")
+
+
 
 
