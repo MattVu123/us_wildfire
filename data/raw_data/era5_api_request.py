@@ -52,11 +52,11 @@ for year in years:
         }
 
         zip_filename = output_dir / f"era5_us_{year_str}_{month_str}.zip"
-        print(f"\n📥 Downloading ERA5 data for {year_str}-{month_str}...")
+        print(f"\nDownloading ERA5 data for {year_str}-{month_str}...")
 
         try:
             client.retrieve("reanalysis-era5-single-levels", request, str(zip_filename))
-            print(f"✔️ Saved to {zip_filename.name}")
+            print(f"Saved to {zip_filename.name}")
 
             # Extract both instant and accum .nc files
             with zipfile.ZipFile(zip_filename, 'r') as zip_ref:
@@ -80,14 +80,14 @@ for year in years:
             accum_path.rename(renamed_accum)
 
             # Merge datasets
-            print("🔀 Merging instant and accum datasets...")
+            print("Merging instant and accum datasets...")
             ds_instant = xr.open_dataset(renamed_instant)
             ds_accum = xr.open_dataset(renamed_accum)
             ds_merged = xr.merge([ds_instant, ds_accum])
 
             merged_path = output_dir / f"era5_us_{year_str}_{month_str}.nc"
             ds_merged.to_netcdf(merged_path)
-            print(f"✅ Merged dataset saved to {merged_path.name}")
+            print(f"Merged dataset saved to {merged_path.name}")
 
             # Close and cleanup
             ds_instant.close()
@@ -95,10 +95,10 @@ for year in years:
             for f in [zip_filename, renamed_instant, renamed_accum]:
                 if f.exists():
                     f.unlink()
-                    print(f"🗑️ Deleted {f.name}")
+                    print(f"Deleted {f.name}")
 
         except Exception as e:
-            print(f"❌ Failed for {year_str}-{month_str}: {e}")
+            print(f"Failed for {year_str}-{month_str}: {e}")
 
 
 
