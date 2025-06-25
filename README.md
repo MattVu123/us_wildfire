@@ -8,4 +8,6 @@ To develop these new methods a better understanding of the geographic location, 
 
 The purpose of this project is to develop a Dashboard with analytics to provide statistics of wildfire. Emphasis is on the progression of the size of the fire over time and the use of aerial fire fighting (if any to contain and/or suppress the fire). 
 
+Create two models.
+
 
