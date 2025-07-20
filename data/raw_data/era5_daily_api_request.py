@@ -6,7 +6,7 @@ import xarray as xr
 # ===============================
 # CONFIGURATION
 # ===============================
-years = range(2020, 2026)
+years = range(2025, 2026)
 months = range(1, 13)
 area = [71.5, -179.1, 18.9, -66.9]  # [N, W, S, E]
 output_dir = Path.cwd() / "era5_daily_downloads"
