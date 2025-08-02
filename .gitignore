@@ -19,6 +19,8 @@ data/raw_data/MODIS_GWIS_Final_FireEvents.zip
 data/processed_data/*
 data/raw_data/DMP_NationalGACCBoundaries_Public_3739435096029061345.zip
 dashboard/*
+data/raw_data/shp.zip
+
 trash/production_models/*.pkl
 
 
