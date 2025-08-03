@@ -1,11 +1,29 @@
 # US Wildfire Analytics
-## PROBLEM DESCRIPTION  
-With changes in atmospheric conditions due to anthropogenic (i.e. human made) emissions, the occurrence, frequency and magnitude of wildfires has increased over the last two decades. Also human shelters are increasingly developed in more fire prone areas resulting increased hazards and costs.  
+## High-level Overview of the Problem, Methods, and Outcomes
+  
+Over the last several years, wildfires have been increasingly destructive and unpredictable due to human activity and rising temperatures due to climate control. These factors have been responsible for the wildfires to grow in both frequency and intensity. To assist wildfire mitigation, this project developed three machine learning models to predict the total area burned, the average daily area burned, and the duration of the wildfires. These models were created using data from ERA5 which provided the necessary climate variables as well as data from the Global Fire Atlas which provided the wildfire behavior data. Five different models – Random Forest, Linear Regression, Decision Trees, K Nearest Neighbors, and XGBoost - were implemented and tested using 5-fold cross-validation and grid search. 
+An interactive tableau dashboard was also created to visualize the wildfire locations, the predictive model outputs, and the airport infrastructure that is suitable for aerial firefighting. The dashboard includes distance-based analysis between the wildfires and the airports as well as airtanker bases. It also includes windspeed assessment to help evaluate aerial suppression efforts.  
+ 
+## Objectives
 
-New methods and technologies are required to contain and suppress the wildfires.  
+- Predict the:
+  - Total area burned
+  - Daily average area burned
+  - Duration of wildfires
+- Analyze feasibility of aerial firefighting
+- Visualize wildfire and climate insights through an interactive dashboard
 
-To develop these new methods a better understanding of the geographic location, size, progression is required.  
+## Deliverables
 
-The purpose of this project is to develop a Dashboard with analytics to provide statistics of wildfire. Emphasis is on the progression of the size of the fire over time and the use of aerial fire fighting (if any to contain and/or suppress the fire). 
+- Three optimized ML regression models:
+  - Total area burned
+  - Daily average area burned
+  - Duration
+- Interactive Tableau dashboard
+- GitHub repository
+- Final report and presentation
+  
+
+
 
 
