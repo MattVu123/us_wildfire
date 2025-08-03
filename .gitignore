@@ -1,26 +1,8 @@
-# Ignore everything in the folder
-data/raw_data/*
-
-# Unignore the folder itself (needed)
-!data/raw_data/
-
-# Unignore zip files in the folder
-!data/raw_data/*.zip
-
-# Unignore Python files in the folder
-!data/raw_data/*.py
-
-# Unignore notebook files in the folder
-!data/raw_data/*.ipynb
-
-data/raw_data/Artes-Vivancos_San-Miguel_2018.zip
-data/raw_data/MODIS_GWIS_Active_FireEvents.zip
-data/raw_data/MODIS_GWIS_Final_FireEvents.zip
-data/processed_data/*
-data/raw_data/DMP_NationalGACCBoundaries_Public_3739435096029061345.zip
-dashboard/*
-data/raw_data/shp.zip
-
-trash/production_models/*.pkl
-
+trash/*
+data/processed/*
+!data/processed/README.md
+data/raw/*
+!data/raw/README.md
+production_models/*
+!production_models/*README.md
 

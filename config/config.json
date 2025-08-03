@@ -1,0 +1,32 @@
+{
+  "raw_data_paths": {
+    "era5_daily_2020_2024": "us_wildfire/data/raw/era5_daily",
+    "era5_daily_2025": "us_wildfire/data/raw/era_daily_2025",
+    "global_fire_atlas": "us_wildfire/data/raw/shp",
+    "gacc_boundaries": "us_wildfire/data/raw/gacc_boundaries",
+    "our_airports": "us_wildfire/data/raw/our_airports_raw",
+    "wfigs_2025": "us_wildfire/data/raw/WFIGS Incident Locations Perimeters Year to Date 2025",
+    "military_airports": "us_wildfire/data/raw/military_airports.xlsx",
+    "npias_airports": "us_wildfire/data/raw/npias.xlsx",
+    "airtanker_bases_pdf": "us_wildfire/data/raw/pms507-ATB-directory2018.pdf"
+  },
+  "processed_data_paths": {
+    "airports_processed": "us_wildfire/data/processed/airports_processed.csv",
+    "airports_runways_joined": "us_wildfire/data/processed/airports_runways_joined.csv",
+    "wildfire_behavior": "us_wildfire/data/processed/BurnData.csv",
+    "full_dataset": "us_wildfire/data/processed/full_wildfire_weather_2020_2024.csv",
+    "distance_to_airports": "us_wildfire/data/processed/nearest_airport_airtanker_bases_to_fires_final.csv",
+    "runways_only": "us_wildfire/data/processed/runways_processed.csv",
+    "test_data": "us_wildfire/data/processed/test_wildfire_weather_2020_2024.csv",
+    "train_data": "us_wildfire/data/processed/training_wildfire_weather_2020_2024.csv",
+    "unfiltered_train_test": "us_wildfire/data/processed/Wildfire_Weather_2020_2024.csv"
+  },
+  "production_model_paths": {
+    "duration_model": "us_wildfire/production_models/duration_model.pkl",
+    "duration_params": "us_wildfire/production_models/durationparams.pkl",
+    "fire_spread_model": "us_wildfire/production_models/fire_spread_model.pkl",
+    "spread_params": "us_wildfire/production_models/spreadparams.pkl",
+    "size_model": "us_wildfire/production_models/size_model.pkl",
+    "size_params": "us_wildfire/production_models/sizeparams.pkl"
+  }
+}
