@@ -5,4 +5,6 @@ data/raw/*
 !data/raw/README.md
 production_models/*
 !production_models/*README.md
+data/production_model_predictions/*
+!data/production_model_predictions/README.md
 
