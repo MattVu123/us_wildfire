@@ -1,3 +1,4 @@
+# the module contains functions to compute the distances between wildfires and the nearest airports/airtanker bases.
 import pandas as pd
 import numpy as np
 
