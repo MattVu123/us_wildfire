@@ -1,3 +1,4 @@
+# this module contains functions to specify the gacc regions for wildfires and airports/airtanker bases
 import geopandas as gpd
 import pandas as pd
 from shapely.geometry import Point

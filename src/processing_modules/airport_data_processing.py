@@ -1,6 +1,7 @@
 # airport_data_processing.py
 # ------------------------------------------------------------------
-# Script for processing US airport and runway data for wildfire risk
+# Script for processing US airport and runway data for wildfire risk.
+# This module provides functions to process the OurAirports datasets
 # ------------------------------------------------------------------
 
 import os
@@ -155,4 +156,4 @@ if __name__ == '__main__':
     filtered = aggregate_runways(filtered)
     filtered = flag_airtanker_bases(filtered)
     save_outputs(filtered)
-    print("✅ Data processing complete.")
+    print("Data processing complete.")

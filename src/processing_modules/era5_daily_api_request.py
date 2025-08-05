@@ -1,3 +1,4 @@
+# this module provides functions to send an api request to obtain the era5 dataset
 import cdsapi
 from pathlib import Path
 import zipfile
