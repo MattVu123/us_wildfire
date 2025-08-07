@@ -91,6 +91,7 @@ After processing the 2020-2024 ERA5 and Global Fire Atlas, the  data was randoml
 ## Important Links:
 - GitHub repo: https://github.com/MattVu123/us_wildfire.git
 - OneDrive (where items that could not be pushed to GitHub are found): https://gmuedu-my.sharepoint.com/:f:/r/personal/vkaja_gmu_edu/Documents/Summer%202025%20Capstone/us_wildfire?csf=1&web=1&e=VWxM0S
+- Dashboard: https://public.tableau.com/app/profile/azeem.holland/viz/wildfire_dashboard2/WildfireDashboard?publish=yes
 
 ## Overall structure, key content, setup, and tour
 
